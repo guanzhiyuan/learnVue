@@ -1,0 +1,5 @@
+GitHub 账号：guanzhiyuan 密码：xiaohu@905883
+
+1、电脑新装上Git以后，要配置全局用户名和邮箱，不然无法提交
+	git config --global user.name "name"
+	git config --global user.email "xxxx@qq.com"
