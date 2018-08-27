@@ -46,33 +46,17 @@
 </template>
 
 <script>
+	
+	
 	export default {
 		name: 'sysUser',
 		data: function() {
 			return {
-				options: [{
-					value: 1,
-					label: "男"
-				}, {
-					value: 0,
-					label: "女"
-				}],
-				tableData: [{
-					"id": "1",
-					"name": "张三",
-					"tel": "13312341234",
-					"idNum": "320121199601011111",
-					"sex": 0
-				}, {
-					"id": "2",
-					"name": "李四",
-					"tel": "13312341234",
-					"idNum": "320121199601011111",
-					"sex": 1
-				}],
+				options: [],
 				userName: "",
 				userIdNum: '',
 				sex: "",
+				tableData:[],
 				page:{
 					currentPage:1,
 					size:10,
@@ -80,6 +64,9 @@
 					count: 5
 				}
 			}
+		},
+		mounted:function () {
+			this.getData();
 		},
 		methods: {
 			btn_reset: function() {
@@ -99,6 +86,20 @@
 			},
 			toAdd(){
 				this.$router.push({name: 'SysUserAdd'});
+			},
+			getData(){
+				console.log("getData");
+				let _this = this;
+				_this.$http.get("/getUser.json")
+				.then(function (res) {
+					console.log("success");
+					if(res.data.code == 200){
+						_this.tableData = res.data.result;
+					}
+				})
+				.catch(function(err){
+					console.log(err)
+				})
 			}
 		}
 	}
